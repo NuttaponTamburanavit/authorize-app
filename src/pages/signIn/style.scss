@@ -1,0 +1,35 @@
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  background-image: linear-gradient(to right, rgb(134, 245, 255) , rgb(187, 66, 187));
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  box-sizing: border-box;
+  
+  width: 450px;
+  padding: 20px 50px;
+  border-radius: 4px;
+
+  background: #fff;
+  
+  .form-input {
+    input {
+      border: none;
+      background: none !important;
+    }
+    
+    padding: 5px 10px;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
