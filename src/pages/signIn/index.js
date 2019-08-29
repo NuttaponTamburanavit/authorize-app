@@ -11,9 +11,9 @@ class SignIn extends Component {
           <input type="text" placeholder="Email" />
         </div>
         <div className="form-input">
-          <input className="form-input" type="password" placeholder="Password" />
+          <input type="password" placeholder="Password" />
         </div>
-        <button>Submit</button>
+        <button className="submit-btn">Submit</button>
       </div>
      </div>
    )
