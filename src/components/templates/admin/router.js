@@ -33,10 +33,6 @@ class Router extends React.Component {
   }
 }
 
-// const mapStateToProps = (state, ownProps) => ({
-//   profile: state.User.get('profile')
-// });
-
 export default withRouter(connect(
   null,
   {}
