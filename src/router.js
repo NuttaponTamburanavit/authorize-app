@@ -59,7 +59,7 @@ class PublicRouter extends Component {
     const { userToken } = this.state;
     
     if (userToken !== nextState.userToken) {
-      window.location = "/dashboard";
+      // window.location = "/dashboard";
       return true;
     }
     return false;

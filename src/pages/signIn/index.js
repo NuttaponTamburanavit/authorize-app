@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
+
 import Loading from '../loading';
 import AuthActions from '../../redux/auth/actions';
 
@@ -59,7 +61,18 @@ class SignIn extends Component {
 
   render() {
     const { loading } = this.state;
+    const { userToken, location } = this.props;
+
     let Component = <Loading />;
+
+    if (userToken) {
+      return (<Redirect
+        to={{
+          pathname: '/dashboard',
+          state: { from: location },
+        }}
+      />);
+    }
 
     if (!loading) {
       Component = (
@@ -89,7 +102,7 @@ const mapStateToProps = (state, ownProps) => {
     isSubmitLogin: state.Auth.isSubmitLogin,
   };
 }
-// export default SignIn;
+
 export default connect(
   mapStateToProps,
   { login }
