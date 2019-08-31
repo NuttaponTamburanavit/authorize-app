@@ -1,0 +1,33 @@
+.admin-template-container {
+  height: 100vh;
+
+  .menu-bar {
+    background: #fff;
+    padding: 0;
+
+    .trigger {
+      font-size: 18px;
+      line-height: 64px;
+      padding: 0 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+  }
+
+  .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
+
+  .content-template {
+    margin: 24px 16px;
+    padding: 24px;
+    background: #fff;
+    min-height: 280px;
+  }
+}

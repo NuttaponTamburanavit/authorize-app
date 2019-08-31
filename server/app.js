@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => { 
   res.json({
-    success: true,
+    status: 200,
     token: '12345',
     message: 'Login success'
   })

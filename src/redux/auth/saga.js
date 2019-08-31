@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import { clearToken, getToken } from '../../helpers/auth';
 
 import actions from './actions';
-// import { authAPI } from './api';
+import { authAPI } from './api';
 
 // import messageActions from '../message/actions';
 
@@ -12,26 +12,23 @@ import actions from './actions';
 export function* loginRequest() {
   yield takeEvery(actions.LOGIN_REQUEST, function* (data) {
     
-    console.log('call login')
-    // const api = yield call(authAPI.login, data.form);
-    // if (api.status === "000") {
-    //   // yield localStorage.setItem('token', JSON.stringify(api.data.token));
-    //   // yield localStorage.setItem('role', JSON.stringify(api.data.role));
+    const api = yield call(authAPI.login, data.form);
+    // console.log('call login', api)
+    if (api.status === 200) {
+      yield localStorage.setItem('token', JSON.stringify(api.token));
+      // yield put(set_message('success', 'เข้าสู่ระบบสำเร็จ'));
 
-    //   // yield put(set_message('success', 'เข้าสู่ระบบสำเร็จ'));
-    //   yield put({
-    //     type: actions.LOGIN_SUCCESS,
-    //     status: api.status,
-    //     token: api.data.token,
-    //   });
-    // } else {
-    //   yield put({
-    //     type: actions.ERROR,
-    //     status: api.status,
-    //     token: api.data.token,
-    //     role: api.data.role
-    //   });
-    // }
+      yield put({
+        type: actions.LOGIN_SUCCESS,
+        status: api.status,
+        token: api.token,
+      });
+    } else {
+      yield put({
+        type: actions.ERROR,
+        status: api.status
+      });
+    }
   });
 }
 

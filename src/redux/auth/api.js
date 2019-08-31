@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 const domainURL = 'http://localhost:9000';
 
-export const AuthenAPI = {
+export const authAPI = {
   login() {
     let url = `${domainURL}/login`;
     // return Axios.post(url, { headers: {'Authorization': `Bearer ${getToken()}`}})

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import DashboardTemplate from './components/templates/dashboard';
+import AdminTemplate from './components/templates/admin';
 import SignIn from "./pages/signIn";
 
 const handleRedirect = (props, userToken) => {
@@ -33,23 +34,63 @@ const AdminRoute = ({ component: Component, userToken, ...rest }) => (
   />
 );
 
-const PublicRouter = () => {
-  let userToken;
+class PublicRouter extends Component {
+  constructor(props) {
+    super(props);
 
-  return(
-    <Router>
-      <div className="App">
-        <Route exact path={`/`} component={SignIn} />
-        <Route path={`/signin`} component={SignIn} />
+    this.state = {
+      userToken: null
+    }
+  }
+  componentDidMount() {
+    const { userToken } = this.props;
+    
+    this.setState({
+      userToken
+    })
+  }
+  static getDerivedStateFromProps(props, state) {
+    const { userToken } = props;
+    return {
+      userToken
+    }
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    const { userToken } = this.state;
+    
+    if (userToken !== nextState.userToken) {
+      window.location = "/dashboard";
+      return true;
+    }
+    return false;
+  }
+  render() {
+    const { userToken } = this.state;
+    
+    return(
+      <Router>
+        <div className="App">
+          <Route exact path={`/`} component={SignIn} />
+          <Route path={`/signin`} component={SignIn} />
 
-        <AdminRoute
-          path="/dashboard"
-          component={DashboardTemplate}
-          userToken={userToken}
-        />
-      </div>
-    </Router>
-  )
+          <AdminRoute
+            path="/dashboard"
+            component={AdminTemplate}
+            userToken={userToken}
+          />
+        </div>
+      </Router>
+    )
+  }
 }
 
-export default PublicRouter;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    userToken: state.Auth.token,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  {}
+) (PublicRouter);
