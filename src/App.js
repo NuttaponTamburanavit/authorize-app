@@ -1,11 +1,16 @@
 import React from 'react';
-import PublicRouter from './router';
+import { Provider } from 'react-redux';
+import { store, history } from './redux/store';
+
+import PublicRoutes from './router';
 // import logo from './logo.svg';
 import './App.scss';
 
 const App = () => {
   return (
-    <PublicRouter />
+    <Provider store={store}>
+      <PublicRoutes history={history} />
+    </Provider>
   )
 }
 
