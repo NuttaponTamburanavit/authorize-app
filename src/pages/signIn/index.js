@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { AuthenAPI } from '../../api/authen.js';
+import AuthActions from '../../redux/auth/actions';
 
 import './style.scss';
 
+const { login } = AuthActions;
+
 class SignIn extends Component {
 
-  async clickLogin() {
-    const res = await AuthenAPI.login();
-    if (res.success) {
-      localStorage.setItem('token', JSON.stringify(res.token));
-    }
+  clickLogin() {
+    login();
+    // const res = await AuthenAPI.login();
+    // if (res.success) {
+    //   localStorage.setItem('token', JSON.stringify(res.token));
+    // }
     // console.log(res)
   }
 
@@ -32,4 +38,9 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+// export default SignIn;
+export default connect(
+  // mapStateToProps,
+  null,
+  { login }
+) (SignIn);
