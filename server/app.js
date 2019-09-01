@@ -1,6 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const path = require('path');
+const mongoose = require('mongoose');
+
+const Routes = require("./routes");
+
+const connectMongoDB = () => {
+  const mongoDB = 'mongodb://127.0.0.1/fancy-app';
+  mongoose.connect(mongoDB, { useNewUrlParser: true });
+
+  const db = mongoose.connection;
+
+  if(!db) {
+    console.log("Error connecting db")
+  } else {
+    console.log("Db connected successfully")
+  }
+
+  db.on('error', 
+    console.error.bind(console, 'MongoDB connection error:')
+  );
+}
+
+connectMongoDB();
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,20 +33,29 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => { 
-  res.send({ success: true }) 
+  res.send('Hello World with Express');
 })
 
-app.post('/login', (req, res) => { 
-  console.log({ body: req.body })
-  res.json({
-    status: 200,
-    token: '12345',
-    message: 'Login success'
-  })
-})
+app.use('/api', Routes);
+
+// app.post('/login', (req, res) => { 
+//   const users = User.find({});
+
+//   console.log({ 
+//     body: req.body, 
+//     users 
+//   });
+
+//   res.json({
+//     status: 200,
+//     token: '12345',
+//     message: 'Login success'
+//   })
+// })
 
 module.exports = app;
 
+// const path = require('path');
 // app.use(express.static(path.resolve(__dirname, '..', 'build')));
 // app.get('*', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));

@@ -4,7 +4,7 @@ const domainURL = 'http://localhost:9000';
 
 export const authAPI = {
   login(form) {
-    let url = `${domainURL}/login`;
+    let url = `${domainURL}/api/login`;
     // return Axios.post(url, { headers: {'Authorization': `Bearer ${getToken()}`}})
     return Axios.post(url, form)
     .then(res => {
