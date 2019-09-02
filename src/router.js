@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import AdminTemplate from './components/templates/admin';
-import SignIn from "./pages/signIn";
+import SignIn from "./pages/signin";
+import Register from "./pages/register";
 
 const handleRedirect = (props, userToken) => {
   let path = '/';
@@ -72,6 +73,7 @@ class PublicRouter extends Component {
         <div className="App">
           <Route exact path={`/`} component={SignIn} />
           <Route path={`/signin`} component={SignIn} />
+          <Route path={`/register`} component={Register} />
 
           <AdminRoute
             path="/dashboard"

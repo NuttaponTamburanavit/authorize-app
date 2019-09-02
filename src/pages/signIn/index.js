@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import Loading from '../loading';
 import AuthActions from '../../redux/auth/actions';
@@ -76,7 +76,7 @@ class SignIn extends Component {
 
     if (!loading) {
       Component = (
-        <div className="signin-container">
+        <div className="guest-container">
           <div className="signin-form">
             <h1>Fancy App</h1>
             <div className="form-input">
@@ -86,7 +86,9 @@ class SignIn extends Component {
               <input type="password" placeholder="Password" onKeyUp={this.inputPassword} />
             </div>
             <button className="submit-btn" onClick={this.clickLogin}>LOGIN</button>
-            <button className="register-btn">CREAT NEW ACCOUNT</button>
+            <Link to="/register" className="register-btn">
+              CREAT NEW ACCOUNT
+            </Link>
           </div>
         </div>
       );

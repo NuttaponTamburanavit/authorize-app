@@ -31,6 +31,15 @@
   height: 100%;
 }
 
+.guest-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  background-image: linear-gradient(to right, rgb(134, 245, 255) , rgb(187, 66, 187));
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
