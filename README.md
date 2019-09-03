@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Start app
+- Run `mongod`
+- **Start server**, Go to root project `node server/index.js`
+- **Start app**, Go to root project `yarn start`
+- Let's fun on `localhost:3000`
+
 ## Available Scripts
 
 In the project directory, you can run:
