@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from "react-router-dom";
+import { Icon } from 'antd';
 
 import Loading from '../loading';
-import AuthActions from '../../redux/auth/actions';
+import UserActions from '../../redux/user/actions';
 
 import './style.scss';
 
-const { login } = AuthActions;
+const { create_user } = UserActions;
 
 class Register extends Component {
   constructor(props) {
@@ -56,11 +57,10 @@ class Register extends Component {
 
   clickRegister = () => {
     const { formRegister } = this.state;
-    const { login } = this.props;
+    const { create_user } = this.props;
 
     if(this.validateForm()) {
-      console.log('Form success');
-      // login(formRegister);
+      create_user(formRegister);
     }
   }
 
@@ -80,8 +80,15 @@ class Register extends Component {
       this.refs.confirmPassword.classList.add('error')
       isFormCorrect = false;
     }
-    if (!this.validateMatchPassword(formRegister.password, formRegister.confirmPassword)) {
+    if (formRegister.password !== formRegister.confirmPassword) {
+      this.refs.confirmPassword.classList.add('error')
       isFormCorrect = false;
+    }
+
+    if (isFormCorrect) {
+      this.refs.email.classList.remove('error');
+      this.refs.password.classList.remove('error')
+      this.refs.confirmPassword.classList.remove('error')
     }
     return isFormCorrect;
   }
@@ -89,10 +96,8 @@ class Register extends Component {
   validateMatchPassword(password, confirmPassword) {
     if (password === confirmPassword) {
       this.refs.confirmPassword.classList.remove('error')
-      return true;
     } else {
       this.refs.confirmPassword.classList.add('error')
-      return false;
     }
   }
 
@@ -110,7 +115,7 @@ class Register extends Component {
 
   render() {
     const { loading } = this.state;
-    const { userToken, location } = this.props;
+    const { userToken, location, isSubmitRegister } = this.props;
 
     let Component = <Loading />;
 
@@ -129,20 +134,27 @@ class Register extends Component {
           <div className="register-form">
             <h1>Create Account</h1>
             <div className="form-input" ref="email">
-              <input type="text" placeholder="Email" onKeyUp={this.inputEmail} />
-              <span className="text-warning">Email invalid</span>
+              <input type="text" placeholder="Email" onKeyUp={this.inputEmail} autoComplete="new-email"/>
+              <span className="text-warning">Email required.</span>
             </div>
             <div className="form-input" ref="password">
-              <input type="password" placeholder="Password" onKeyUp={this.inputPassword} />
-              <span className="text-warning">Password invalid</span>
+              <input type="password" placeholder="Password" onKeyUp={this.inputPassword} autoComplete="new-password"/>
+              <span className="text-warning">Password required.</span>
             </div>
             <div className="form-input" ref="confirmPassword">
-              <input type="password" placeholder="Confirm Password" onKeyUp={this.inputConfirmPassword} />
-              <span className="text-warning">Confirm password unmatch</span>
+              <input type="password" placeholder="Confirm Password" onKeyUp={this.inputConfirmPassword} autoComplete="new-password"/>
+              <span className="text-warning">Confirm password unmatch.</span>
             </div>
 
-            <button className="submit-btn" onClick={this.clickRegister}>Register</button>
-            <Link to="/signin" className="register-btn">
+            <button className={`register-submit-btn ${isSubmitRegister ? `disabled` : ``}`} onClick={this.clickRegister}>
+              {isSubmitRegister &&
+                <span className="loading-icon">
+                  <Icon type="loading" />
+                </span>
+              }
+              Register
+            </button>
+            <Link to="/signin" className="back-to-login-btn">
               Back to LogIn
             </Link>
           </div>
@@ -157,11 +169,11 @@ class Register extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     userToken: state.Auth.token,
-    isSubmitLogin: state.Auth.isSubmitLogin,
+    isSubmitRegister: state.User.isSubmitRegister,
   };
 }
 
 export default connect(
   mapStateToProps,
-  { login }
+  { create_user }
 ) (Register);

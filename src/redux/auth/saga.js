@@ -7,11 +7,7 @@ import { clearToken, getToken } from '../../helpers/auth';
 import actions from './actions';
 import { authAPI } from './api';
 
-// import messageActions from '../message/actions';
-
-// const { set_message } = messageActions;
-
-export function* loginRequest() {
+export function* login_request() {
   yield takeEvery(actions.LOGIN_REQUEST, function* (data) {
     
     const api = yield call(authAPI.login, data.form);
@@ -30,7 +26,7 @@ export function* loginRequest() {
       message.error('Email or Password incorrect');
 
       yield put({
-        type: actions.ERROR,
+        type: actions.LOGIN_ERROR,
         status: api.status
       });
     }
@@ -47,7 +43,7 @@ export function* logout() {
 
 export default function* rootSaga() {
   yield all([
-    fork(loginRequest),
+    fork(login_request),
     fork(logout),
   ]);
 }

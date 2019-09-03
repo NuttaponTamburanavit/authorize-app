@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const authController = require('./controllers/auth');
+const userController = require('./controllers/user');
 
 router.get('/', function (req, res) {
   res.json({
@@ -9,6 +10,7 @@ router.get('/', function (req, res) {
 });
 
 router.route('/login').post(authController.login);
-router.route('/register').post(authController.register);
+
+router.route('/users').post(userController.create_user);
 
 module.exports = router;

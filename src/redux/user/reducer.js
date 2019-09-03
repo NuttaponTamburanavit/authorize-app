@@ -1,36 +1,28 @@
-import { getToken } from '../../helpers/auth';
 import Actions from './actions';
 
 const initState = {
-  token: null,
-  isSubmitLogin: false
+  isSubmitRegister: false
 }
 
 export default function authReducer(
-  state = { 
-    ...initState, token: getToken()
-  },
-  action
+  state = initState, action
 ) {
   switch (action.type) {
-    case Actions.LOGIN_REQUEST:
+    case Actions.CREATE_USER_REQUEST:
       return {
         ...initState,
-        isSubmitLogin: true
+        isSubmitRegister: true
       }
-    case Actions.LOGIN_SUCCESS:
+    case Actions.CREATE_USER_SUCCESS:
       return {
         ...initState,
         isSubmitLogin: false,
-        token: action.token
       }
-    case Actions.LOGIN_ERROR:
+    case Actions.CREATE_USER_ERROR:
       return {
         ...initState,
         isSubmitLogin: false
       };
-    case Actions.LOGOUT:
-      return initState;
 
     default:
       return state;

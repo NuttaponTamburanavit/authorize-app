@@ -42,7 +42,7 @@
     }
   }
 
-  .submit-btn, .register-btn {
+  .register-submit-btn, .back-to-login-btn {
     margin-bottom: 20px;
 
     &:last-child {
@@ -54,7 +54,7 @@
     }
   }
 
-  .submit-btn {
+  .register-submit-btn {
     width: 100%;
     padding: 15px 20px;
     border-radius: 2px;
@@ -72,9 +72,23 @@
       box-shadow: 1px 3px 5px #aaa;
       opacity: 0.8;
     }
+
+    &.disabled {
+      background: #aaa;
+      cursor: default;
+
+      &:hover {
+        box-shadow: none;
+        opacity: 1;
+      }
+    }
+
+    .loading-icon {
+      padding-right: 10px;
+    }
   }
 
-  .register-btn {
+  .back-to-login-btn {
     width: 100%;
     padding: 10px 20px;
     border-radius: 2px;
