@@ -1,33 +1,27 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon  } from 'antd';
+import { Icon  } from 'antd';
 import { Link } from 'react-router-dom';
-
-const { Sider } = Layout;
+import './style.scss';
 
 class MenuSidebar extends Component {
   render() {
-    const { url } = this.props;
-
+    const { url, collapsed } = this.props;
+    let currentPathname = window.location.pathname;
     return (
-      <Sider {...this.props}>
+      <div className={`sidebar ${collapsed ? `collapsed` : ``}`}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">
-            <Link to={`${url}`}>
-              <Icon type="dashboard" />
-              <span>Dashboard</span>
-            </Link>
-          </Menu.Item>
-
-          <Menu.Item key="2">
-            <Link to={`${url}/profile`}>
-              <Icon type="user" />
-              <span>Profile</span>
-            </Link>
-          </Menu.Item>
-        </Menu>
-      </Sider>
-    )
+        <div className="menu">
+          <Link to={`${url}`} className={`menu-item ${url === currentPathname ? `menu-active`: ``}`}>
+            <Icon type="dashboard" />
+            <span>Dashboard</span>
+          </Link>
+          <Link to={`${url}/profile`} className={`menu-item ${`${url}/profile` === currentPathname ? `menu-active`: ``}`}>
+            <Icon type="user" />
+            <span>Profile</span>
+          </Link>
+        </div>
+      </div>
+    );
   }
 }
 

@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Layout, Icon } from 'antd';
 import Router from './router';
 import MenuSidebar from '../../organisms/menuSidebar';
+import Header from '../../organisms/header';
 
 import AuthActions from '../../../redux/auth/actions';
 
 import './style.scss';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const { logout } = AuthActions;
 
 class AdminTemplate extends Component {
@@ -37,8 +38,7 @@ class AdminTemplate extends Component {
     return (
       <Layout className="admin-template-container">
         <MenuSidebar 
-          trigger={null} 
-          collapsible 
+          trigger={null}  
           url={url}
           collapsed={collapsed} 
         />

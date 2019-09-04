@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from "react-router-dom";
+import { Icon } from 'antd';
 
 import Loading from '../loading';
 import AuthActions from '../../redux/auth/actions';
@@ -40,9 +41,10 @@ class SignIn extends Component {
     })
   }
 
-  clickLogin = () => {
+  submitLogin = (event) => {
     const { formLogin } = this.state;
     const { login } = this.props;
+    event.preventDefault();
 
     login(formLogin);
   }
@@ -61,7 +63,7 @@ class SignIn extends Component {
 
   render() {
     const { loading } = this.state;
-    const { userToken, location } = this.props;
+    const { userToken, location, isSubmitLogin } = this.props;
 
     let Component = <Loading />;
 
@@ -77,7 +79,7 @@ class SignIn extends Component {
     if (!loading) {
       Component = (
         <div className="guest-container">
-          <div className="signin-form">
+          <form className="signin-form" onSubmit={this.submitLogin}>
             <h1>Fancy App</h1>
             <div className="form-input">
               <input type="text" placeholder="Email" onKeyUp={this.inputEmail} />
@@ -85,11 +87,18 @@ class SignIn extends Component {
             <div className="form-input">
               <input type="password" placeholder="Password" onKeyUp={this.inputPassword} />
             </div>
-            <button className="submit-btn" onClick={this.clickLogin}>LOGIN</button>
+            <button className={`submit-btn ${isSubmitLogin ? `disabled` : ``}`} onClick={this.submitLogin}>
+              {isSubmitLogin &&
+                <span className="loading-icon">
+                  <Icon type="loading" />
+                </span>
+              }
+              LOGIN
+            </button>
             <Link to="/register" className="register-btn">
               CREAT NEW ACCOUNT
             </Link>
-          </div>
+          </form>
         </div>
       );
     }

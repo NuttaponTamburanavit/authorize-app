@@ -2,7 +2,7 @@ import { all, takeEvery, call, put, fork } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { message } from 'antd';
 
-import { clearToken, getToken } from '../../helpers/auth';
+import { clearToken } from '../../helpers/auth';
 
 import actions from './actions';
 import { authAPI } from './api';
