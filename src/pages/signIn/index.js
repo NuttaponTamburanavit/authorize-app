@@ -80,7 +80,7 @@ class SignIn extends Component {
       Component = (
         <div className="guest-container">
           <form className="signin-form" onSubmit={this.submitLogin}>
-            <h1>Fancy App</h1>
+            <h1>App</h1>
             <div className="form-input">
               <input type="text" placeholder="Email" onKeyUp={this.inputEmail} />
             </div>
