@@ -146,7 +146,10 @@ class Register extends Component {
               <span className="text-warning">Confirm password unmatch.</span>
             </div>
 
-            <button className={`register-submit-btn ${isSubmitRegister ? `disabled` : ``}`} onClick={this.clickRegister}>
+            <button className={`register-submit-btn ${isSubmitRegister ? `disabled` : ``}`} 
+              onClick={this.clickRegister} 
+              id="registerSubmit"
+            >
               {isSubmitRegister &&
                 <span className="loading-icon">
                   <Icon type="loading" />
