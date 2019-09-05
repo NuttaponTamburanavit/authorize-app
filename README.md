@@ -1,10 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Authorize-App
+React, Redux Saga, Express, Mongo, Testing
 
 ## Start app
 - Run `mongod`
 - **Start server**, Go to root project `node server/index.js`
 - **Start app**, Go to root project `yarn start`
 - Let's fun on `localhost:3000`
+
+
+### Mongo
+
+Install and run MongoDB with Homebrew
+- MacOS `brew install mongodb`
+- **After downloading Mongo**, create the “db” directory. This is where the Mongo data files will live. You can create the directory in the default location by running `mkdir -p /data/db`
+- **Make sure that the `/data/db` directory has the right permissions** by running
+- **Run the Mongo daemon**, in one of your terminal windows run `mongod`. This should start the Mongo server.
+- **Run the Mongo shell**, with the Mongo daemon running in one terminal, type `mongo` in another terminal window. This will run the Mongo shell which is an application to access data in MongoDB.
+- **To exit the Mongo shell** `quit()`
+- **To stop the Mongo daemon** `cmd-c`
+
 
 ## Available Scripts
 
@@ -72,14 +86,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-### Mongo
-Install and run MongoDB with Homebrew
-- MacOS `brew install mongodb`
-- **After downloading Mongo**, create the “db” directory. This is where the Mongo data files will live. You can create the directory in the default location by running `mkdir -p /data/db`
-- **Make sure that the `/data/db` directory has the right permissions** by running
-- **Run the Mongo daemon**, in one of your terminal windows run `mongod`. This should start the Mongo server.
-- **Run the Mongo shell**, with the Mongo daemon running in one terminal, type `mongo` in another terminal window. This will run the Mongo shell which is an application to access data in MongoDB.
-- **To exit the Mongo shell** `quit()`
-- **To stop the Mongo daemon** `cmd-c`
-
