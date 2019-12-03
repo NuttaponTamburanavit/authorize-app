@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import AdminTemplate from './components/templates/admin';
-import SignIn from "./pages/signin";
+import SignIn from "./pages/signIn";
 import Register from "./pages/register";
 
 const handleRedirect = (props, userToken) => {
